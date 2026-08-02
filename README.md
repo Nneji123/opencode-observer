@@ -64,6 +64,22 @@ rm ~/.config/opencode/plugin/observer.ts ~/.config/opencode/agent/observer.md
 rm -rf ~/.local/share/opencode-observer
 ```
 
+## Known issues
+
+- **OpenCode Desktop may not honor the `observer` agent's configured
+  `model:`.** Confirmed via `opencode export <sessionID>`: when `@observer`
+  is dispatched through the `task` tool from an OpenCode Desktop session, the
+  sub-session's `model` sometimes matches the *parent* session's model
+  instead of the one set in `agent/observer.md`, so the sub-agent inherits a
+  non-vision model and can't actually read the image. The exact same
+  scenario (same config, same multi-turn flow, same `-m` override) was
+  reproduced repeatedly and correctly via the `opencode` CLI, where the
+  sub-agent's own `model:` is always respected — this points to the bug
+  being in Desktop's `task`-dispatch path, not in this plugin/agent config.
+  If you hit "this model does not support image input" from `@observer`
+  itself, try the same prompt via `opencode` (CLI/TUI) to confirm, and check
+  for an OpenCode Desktop update.
+
 ## Notes
 
 - Saved images are written to `$TMPDIR/opencode-observer/<sessionID>/` and
