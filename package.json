@@ -1,0 +1,9 @@
+{
+  "name": "opencode-observer",
+  "version": "0.1.0",
+  "description": "Vision fallback plugin for OpenCode: lets non-multimodal models read images via a multimodal sub-agent",
+  "license": "MIT",
+  "devDependencies": {
+    "@opencode-ai/plugin": "^1.14.50"
+  }
+}
