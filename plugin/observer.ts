@@ -93,7 +93,11 @@ export default (async ({ client, directory }) => {
         })
       }
 
-      output.parts = nextParts
+      // Mutate the array in place rather than reassigning output.parts —
+      // some call sites read the original array reference after this hook
+      // resolves, so a reassignment can silently be dropped.
+      output.parts.length = 0
+      output.parts.push(...nextParts)
     },
   }
 }) satisfies Plugin
